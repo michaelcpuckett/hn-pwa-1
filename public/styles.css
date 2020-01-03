@@ -49,3 +49,6 @@ body {
   --swatch-section-accent: #3078FF;
   --swatch-on-section: white;
 }
+a {
+  color: inherit;
+}

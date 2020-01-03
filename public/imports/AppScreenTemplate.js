@@ -174,12 +174,6 @@
         color: inherit;
         text-decoration: none;
       }
-      .posting-meta {
-        display: grid;
-        grid-auto-flow: column;
-        grid-gap: .5rem;
-        justify-content: flex-start;
-      }
       .visually-hidden {
         position: absolute; 
         overflow: hidden; 
