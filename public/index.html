@@ -281,7 +281,6 @@
             <slot name="text"></slot>
           </div>
           <div class="top-comment-meta top-comment-footer">
-            <span><slot name="score"></slot> Replies</span>
             <span class="top-comment-total-count"><slot name="descendants"></slot> Total Comments</span>
           </div>
         </a>
@@ -415,6 +414,7 @@
             'by',
             'text',
             'score',
+            'descendants',
             'time',
             'type',
             'url'
@@ -440,6 +440,7 @@
           return this.getAttribute('score')
         }
         set score(value) {
+          alert('...')
           if (this.getAttribute('score') != value) {
             this.setAttribute('score', value)
           }
@@ -468,6 +469,14 @@
         set type(value) {
           if (this.getAttribute('type') != value) {
             this.setAttribute('type', value)
+          }
+        }
+        get descendants() {
+          return this.getAttribute('descendants')
+        }
+        set descendants(value) {
+          if (this.getAttribute('descendants') != value) {
+            this.setAttribute('descendants', value)
           }
         }
         get url() {
@@ -564,6 +573,14 @@
             this.setAttribute('type', value)
           }
         }
+        get descendants() {
+          return this.getAttribute('descendants')
+        }
+        set descendants(value) {
+          if (this.getAttribute('descendants') != value) {
+            this.setAttribute('descendants', value)
+          }
+        }
         get url() {
           return this.getAttribute('url')
         }
@@ -577,9 +594,13 @@
         }
         set kids(value) {
           ;(async () => {
-            const data = await fetch(`https://hacker-news.firebaseio.com/v0/item/${value[0]}.json`).then(res => res.json())
+            const data = {
+              ...(await fetch(`https://hacker-news.firebaseio.com/v0/item/${value[0]}.json`).then(res => res.json())) || {},
+              descendants: this.descendants,
+              url: `https://news.ycombinator.com/item?id=${this.id}`
+            }
             const comment = window.document.createElement('top-comment')
-            Object.entries(data || {}).map(([ prop, value ]) => {
+            Object.entries(data).map(([ prop, value ]) => {
               const element = window.document.createElement('data')
               element.setAttribute('slot', prop)
               comment.append(element)
