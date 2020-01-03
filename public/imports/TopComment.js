@@ -42,7 +42,7 @@ window.customElements.define('top-comment', class extends HTMLElement {
     return this.getAttribute('time')
   }
   set time(value) {
-    const options = { dateStyle: 'short', timeStyle: 'short' }
+    const options = { dateStyle: 'short', timeStyle: 'short', hour: '2-digit', minute: '2-digit' }
     const dateTime = new Date(value * 1000).toLocaleString(undefined, options)
     const dateString = dateTime.split(', ')[0]
     const todaysDateString = new Date().toLocaleString(undefined, options).split(', ')[0]

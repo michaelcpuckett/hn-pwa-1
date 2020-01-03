@@ -158,7 +158,7 @@
         justify-content: center;
         align-items: center;
         font-size: 1.25em;
-        -webkit-tap-highlight-color: var(--swatch-section);
+        -webkit-tap-highlight-color: white;
       }
       button {
         background: none;

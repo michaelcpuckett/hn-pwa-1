@@ -43,10 +43,13 @@ window.customElements.define('top-article', class extends HTMLElement {
     return this.getAttribute('time')
   }
   set time(value) {
-    const date = new Date(value * 1000).toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' })
-    const dateString = `${date.split(', ')[1]} ${date.split(', ')[0]}`
-    if (this.getAttribute('time') != dateString) {
-      this.setAttribute('time', dateString)
+    const options = { dateStyle: 'short', timeStyle: 'short', hour: '2-digit', minute: '2-digit' }
+    const dateTime = new Date(value * 1000).toLocaleString(undefined, options)
+    const dateString = dateTime.split(', ')[0]
+    const todaysDateString = new Date().toLocaleString(undefined, options).split(', ')[0]
+    const dateTimeString = `${dateTime.split(', ')[1]}${dateString === todaysDateString ? '' : ` ${dateString}`}`
+    if (this.getAttribute('time') != dateTimeString) {
+      this.setAttribute('time', dateTimeString)
     }
   }
   get title() {
