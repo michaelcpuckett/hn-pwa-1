@@ -1,0 +1,51 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+html {
+  font-size: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  html {
+    background: black;
+    color: white;
+  }
+}
+
+body {
+  --swatch-grey-bg: white;
+  --swatch-on-grey-bg: black;
+
+  line-height: 1.5;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  overscroll-behavior: contain;
+  --edge-padding: 1.5rem;
+  --header-height: 80px;
+  --footer-height: 80px;
+}
+@supports (--foo: env(bar)) {
+  body {
+    --edge-padding: calc(1.5rem + env(safe-area-inset-left, 0) + env(safe-area-inset-right, 0));
+    --header-height: calc(80px + env(safe-area-inset-top, 0));
+    --footer-height: calc(80px + env(safe-area-inset-bottom, 0));
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: black;
+    color: white;
+    --swatch-grey-bg: white;
+  }
+}
+[data-section="topstories"] {
+  --swatch-section: #500F74;
+  --swatch-section-accent: #CD00D8;
+  --swatch-on-section: white;
+}
+[data-section="newstories"] {
+  --swatch-section: #004BD8;
+  --swatch-section-accent: #3078FF;
+  --swatch-on-section: white;
+}
