@@ -9,9 +9,9 @@
           <span class="top-comment-author" property="author">
             <slot name="by"></slot>
           </span>
-          <time class="top-comment-time" datetime="2020-01-01T14:12:11" property="dateCreated">
+          <!--<time class="top-comment-time" datetime="2020-01-01T14:12:11" property="dateCreated">
             <slot name="time"></slot>
-          </time>
+          </time>-->
         </div>
         <div property="abstract">
           <slot name="text"></slot>

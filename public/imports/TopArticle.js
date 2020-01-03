@@ -9,7 +9,7 @@ window.customElements.define('top-article', class extends HTMLElement {
       'descendants',
       'kids',
       'score',
-      'time',
+      // 'time',
       'title',
       'type',
       'url'
@@ -39,19 +39,19 @@ window.customElements.define('top-article', class extends HTMLElement {
       this.setAttribute('score', value)
     }
   }
-  get time() {
-    return this.getAttribute('time')
-  }
-  set time(value) {
-    const options = { dateStyle: 'short', timeStyle: 'short', hour: '2-digit', minute: '2-digit' }
-    const dateTime = new Date(value * 1000).toLocaleString(undefined, options)
-    const dateString = dateTime.split(', ')[0]
-    const todaysDateString = new Date().toLocaleString(undefined, options).split(', ')[0]
-    const dateTimeString = `${dateTime.split(', ')[1]}` //${dateString === todaysDateString ? '' : ` ${dateString}`}`
-    if (this.getAttribute('time') != dateTimeString) {
-      this.setAttribute('time', dateTimeString)
-    }
-  }
+  // get time() {
+  //   return this.getAttribute('time')
+  // }
+  // set time(value) {
+  //   const options = { dateStyle: 'short', timeStyle: 'short', hour: '2-digit', minute: '2-digit' }
+  //   const dateTime = new Date(value * 1000).toLocaleString(undefined, options)
+  //   const dateString = dateTime.split(', ')[0]
+  //   const todaysDateString = new Date().toLocaleString(undefined, options).split(', ')[0]
+  //   const dateTimeString = `${dateTime.split(', ')[1]}` //${dateString === todaysDateString ? '' : ` ${dateString}`}`
+  //   if (this.getAttribute('time') != dateTimeString) {
+  //     this.setAttribute('time', dateTimeString)
+  //   }
+  // }
   get title() {
     return this.getAttribute('title')
   }

@@ -2,9 +2,9 @@
   const html = /*html*/`
     <article class="posting" typeof="SocialMediaPosting">
       <a data-url href="" class="posting-meta">
-        <time class="posting-time" datetime="2020-01-01T14:12:11" property="dateCreated">
+        <!--<time class="posting-time" datetime="2020-01-01T14:12:11" property="dateCreated">
           <slot name="time"></slot>
-        </time>
+        </time>-->
         <span class="posting-submitter" property="author">
           <slot name="by"></slot>
         </span>
