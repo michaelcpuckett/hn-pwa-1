@@ -46,7 +46,7 @@ window.customElements.define('top-comment', class extends HTMLElement {
     const dateTime = new Date(value * 1000).toLocaleString(undefined, options)
     const dateString = dateTime.split(', ')[0]
     const todaysDateString = new Date().toLocaleString(undefined, options).split(', ')[0]
-    const dateTimeString = `${dateTime.split(', ')[1]}${dateString === todaysDateString ? '' : ` ${dateString}`}`
+    const dateTimeString = `${dateTime.split(', ')[1]}`//${dateString === todaysDateString ? '' : ` ${dateString}`}`
     if (this.getAttribute('time') != dateTimeString) {
       this.setAttribute('time', dateTimeString)
     }
