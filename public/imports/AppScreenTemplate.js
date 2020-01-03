@@ -6,7 +6,7 @@
           <span aria-hidden="true">HN</span>
           <span class="visually-hidden">Hacker News</span>
         </h1>
-        Alpha
+        <a href="https://github.com/michaelcpuckett/hn-pwa-1">Alpha</a>
         <!--<nav>
           <button type="button" aria-label="Search" data-modal="search">
             <hn-icon glyph="search"></hn-icon>
