@@ -18,18 +18,13 @@
       isLoading = true
       data.stories = await fetch(`https://hacker-news.firebaseio.com/v0/${type || data.section}.json`).then(res => res.json())
       data.stories = await Promise.all(data.stories.slice(0, 25).map(id => fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(res => res.json())))
-      ;[...window.document.querySelectorAll('top-article')].forEach(el => el.remove())
-      data.stories.forEach(post => {
-        if (post) { // can be null
-          const article = window.document.createElement('top-article')
-          Object.entries(post).map(([ prop, value ]) => {
-            const element = window.document.createElement('data')
-            element.setAttribute('slot', prop)
-            element.innerText = value
-            article.append(element)
-          })
-          window.document.querySelector('app-screen').append(article)
-          Object.assign(article, post)
+      ;[...window.document.querySelectorAll('top-story')].forEach(el => el.remove())
+      data.stories.forEach(story => {
+        if (story) { // can be null
+          const element = window.document.createElement('top-story')
+          window.document.querySelector('app-screen').append(element)
+          element.data = story
+          Object.assign(element, story)
         }
       })
       window.scrollTo(0, 0)

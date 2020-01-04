@@ -1,15 +1,15 @@
 ;(() => {
   const html = /*html*/`
-    <article class="posting" typeof="SocialMediaPosting">
-      <a data-url href="" class="posting-meta">
-        <!--<time class="posting-time" datetime="2020-01-01T14:12:11" property="dateCreated">
+    <article class="top-story" typeof="SocialMediaPosting">
+      <a data-url href="" class="top-story-meta">
+        <!--<time class="top-story-time" datetime="2020-01-01T14:12:11" property="dateCreated">
           <slot name="time"></slot>
         </time>-->
-        <span class="posting-submitter" property="author">
+        <span class="top-story-submitter" property="author">
           <slot name="by"></slot>
         </span>
-        <div class="posting-interaction" typeof="InteractionCounter" property="interactionStatistic">
-          <span class="posting-interaction-count" property="userInteractionCount">
+        <div class="top-story-interaction" typeof="InteractionCounter" property="interactionStatistic">
+          <span class="top-story-interaction-count" property="userInteractionCount">
             <slot name="score"></slot>
           </span>
           <data property="interactionType" value="LikeAction">
@@ -17,9 +17,9 @@
           </data>
         </div>
       </a>
-      <div class="posting-content" property="sharedContent" typeof="Article">
-        <a data-url class="posting-main" href="">
-          <h3 class="posting-headline" property="headline">
+      <div class="top-story-content" property="sharedContent" typeof="Article">
+        <a data-url class="top-story-main" href="">
+          <h3 class="top-story-headline" property="headline">
             <slot name="title"></slot>
           </h3>
         </a>
@@ -71,15 +71,15 @@
         text-decoration: none;
       }
 
-      .posting {
+      .top-story {
         padding-bottom: 3rem;
       }
 
-      .posting-domain {
+      .top-story-domain {
         display: grid;
         padding: 0 var(--edge-padding);
       }
-      .posting-meta,
+      .top-story-meta,
       .top-comment-meta {
         display: grid;
         grid-auto-flow: column;
@@ -87,14 +87,14 @@
         justify-content: flex-start;
       }
 
-      .posting-meta {
+      .top-story-meta {
         font-size: .9em;
         background: var(--swatch-section);
         color: var(--swatch-on-section);
         padding: 1.5em var(--edge-padding) 0;
         border-top: 5px solid var(--swatch-section-accent);
       }
-      .posting-main {
+      .top-story-main {
         margin-bottom: 1.5rem;
         display: grid;
         grid-gap: .5rem;
@@ -114,7 +114,7 @@
     </style>
   `
   const template = window.document.createElement('template')
-  template.setAttribute('id', 'top-article-template')
+  template.setAttribute('id', 'top-story-template')
   template.innerHTML = html
   window.document.body.prepend(template)
 })()
