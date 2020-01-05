@@ -1,7 +1,7 @@
 ;(() => {
   const html = /*html*/`
     <aside class="top-comment" typeof="Comment" property="comment">
-      <a data-url href="">
+      <a data-url data-parentid href="" onclick="openDrawer(event, event.currentTarget.dataset.parentid)">
         <div class="top-comment-meta">
           <h4 class="top-comment-heading">
             Top Comment
@@ -22,12 +22,12 @@
       </a>
     </aside>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        word-break: break-word;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      word-break: break-word;
+    }
       p {
         margin-top: 1rem;
       }    

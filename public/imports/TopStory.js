@@ -41,6 +41,7 @@ window.customElements.define('top-story', class extends HTMLElement {
       const data = {
         ...(await fetch(`https://hacker-news.firebaseio.com/v0/item/${value[0]}.json`).then(res => res.json())) || {},
         descendants: this.data.descendants,
+        parentid: this.data.id,
         url: `https://news.ycombinator.com/item?id=${this.data.id}`
       }
       const element = window.document.createElement('top-comment')

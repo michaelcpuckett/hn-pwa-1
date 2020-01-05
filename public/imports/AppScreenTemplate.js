@@ -24,6 +24,7 @@
           </h2>
           <slot></slot>
         </section>
+        <slot name="drawer"></slot>
       </main>
       <nav class="footer">
         <a href="#" aria-label="Top Stories" onclick="handleTopClick(event)">
@@ -42,11 +43,11 @@
       :host([data-section="newstories"]) [data-show-if]:not([data-show-if="newstories"]) {
         display: none;
       }
-
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        word-break: break-word;
       }
       p {
         margin-top: 1rem;

@@ -47,4 +47,16 @@
     await data.refetch('newstories')
     data.section = 'newstories'
   }
+  window.openDrawer = async (e, id) => {
+    e.preventDefault()
+    id = id || e.currentTarget.dataset.parentid
+    const element = window.document.createElement('drawer-view')
+    element.setAttribute('slot', 'drawer')
+    window.document.querySelector('app-screen').appendChild(element)
+    Object.assign(element, { id })
+  }
+  window.closeDrawer = (e) => {
+    e.preventDefault()
+    window.document.querySelector('drawer-view').remove()
+  }
 })()

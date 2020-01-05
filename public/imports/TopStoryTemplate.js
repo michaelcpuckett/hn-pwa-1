@@ -26,13 +26,13 @@
         <slot name="top-comment"></slot>
       </div>
     </article>
-    <style>          
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        word-break: break-word;
-      }
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      word-break: break-word;
+    }
       p {
         margin-top: 1rem;
       }

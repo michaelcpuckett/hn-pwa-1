@@ -13,9 +13,6 @@ window.customElements.define('top-comment', class extends HTMLElement {
     }
     this.querySelector(`[slot="${slot}"]`).innerHTML = value
   }
-  set id(value) {
-    this.setSlot('id', value)
-  }
   set by(value) {
     this.setSlot('by', value)
   }
@@ -32,12 +29,19 @@ window.customElements.define('top-comment', class extends HTMLElement {
   set descendants(value) {
     this.setSlot('descendants', value)
   }
+  set id(value) {
+    ;[...this.shadowRoot.querySelectorAll('[data-id]')].forEach(element => {
+      element.dataset.id = value
+    })
+  }
+  set parentid(value) {
+    ;[...this.shadowRoot.querySelectorAll('[data-parentid]')].forEach(element => {
+      element.dataset.parentid = value
+    })
+  }
   set url(value) {
-    if (this.getAttribute('url') != value) {
-      this.setAttribute('url', value)
-      ;[...this.shadowRoot.querySelectorAll('[data-url]')].forEach(element => {
-        element.setAttribute('href', value)
-      })
-    }
+    ;[...this.shadowRoot.querySelectorAll('[data-url]')].forEach(element => {
+      element.setAttribute('href', value)
+    })
   }
 })
