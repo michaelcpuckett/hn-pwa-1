@@ -8,21 +8,41 @@ window.customElements.define('app-screen', class extends HTMLElement {
         if (drawerView) {
           drawerView.remove()
         }
+        const embedView = window.document.querySelector('embed-view')
+        if (embedView) {
+          embedView.remove()
+        }
       } else if (window.location.hash.startsWith(`#comments`)) {
         const id = window.location.hash.split('/')[1]
         const element = window.document.createElement('drawer-view')
         element.setAttribute('slot', 'drawer')
-        window.document.querySelector('app-screen').appendChild(element)
+        this.appendChild(element)
         Object.assign(element, { id })
+      } else if (window.location.hash.startsWith(`#embed`)) {
+        let [ _, ...url ] = window.location.hash.split('/')
+        url = url.join('/')
+        const element = window.document.createElement('embed-view')
+        element.setAttribute('slot', 'embed')
+        this.appendChild(element)
+        Object.assign(element, { url })
       }
     })
     
-    window.openDrawer = async (e, id) => {
+    window.openEmbed = (e, url) => {
+      e.preventDefault()
+      url = url || e.currentTarget.dataset.url
+      window.location.hash = `#embed/${url}`
+    }
+    window.openDrawer = (e, id) => {
       e.preventDefault()
       id = id || e.currentTarget.dataset.parentid
       window.location.hash = `#comments/${id}`
     }
     window.closeDrawer = (e) => {
+      e.preventDefault()
+      window.location.hash = ''
+    }
+    window.closeEmbed = (e) => {
       e.preventDefault()
       window.location.hash = ''
     }
@@ -86,7 +106,7 @@ window.customElements.define('app-screen', class extends HTMLElement {
 
     const hammerTime = new Hammer(window.document.body)
     hammerTime.on('swipeend panend', (e) => {
-      const drawerView = window.document.querySelector('drawer-view')
+      const drawerView = window.document.querySelector('drawer-view, embed-view')
       if (drawerView) {
         drawerView.style.transform = ''
         if (e.distance > 180) {
@@ -95,7 +115,7 @@ window.customElements.define('app-screen', class extends HTMLElement {
       }
     })
     hammerTime.on('swiperight panright', (e) => {
-      const drawerView = window.document.querySelector('drawer-view')
+      const drawerView = window.document.querySelector('drawer-view, embed-view')
       if (drawerView) {
         if (e.distance > 180) {
           window.history.back()

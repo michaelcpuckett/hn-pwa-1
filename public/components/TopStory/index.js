@@ -34,6 +34,7 @@ window.customElements.define('top-story', class extends HTMLElement {
   set url(value) {
     ;[...this.shadowRoot.querySelectorAll('[data-url]')].forEach(element => {
       element.setAttribute('href', value)
+      element.dataset.url = value
     })
   }
   set kids(value) {

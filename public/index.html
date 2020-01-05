@@ -3,7 +3,7 @@
   <head>
     <title>HN</title>
     <meta name="description" content="Hacker News PWA" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="apple-touch-icon" href="/icons/icon-512x512.png" />
@@ -16,16 +16,23 @@
     <script type="module">
       import './lib/hammer.js'
 
-      import './imports/AppScreenTemplate.js'
-      import './imports/AppScreen.js'
-      import './imports/TopCommentTemplate.js'
-      import './imports/TopComment.js'
-      import './imports/TopStoryTemplate.js'
-      import './imports/TopStory.js'
-      import './imports/DrawerItemTemplate.js'
-      import './imports/DrawerItem.js'
-      import './imports/DrawerViewTemplate.js'
-      import './imports/DrawerView.js'
+      import './components/AppScreen/template.js'
+      import './components/AppScreen/index.js'
+
+      import './components/TopComment/template.js'
+      import './components/TopComment/index.js'
+
+      import './components/TopStory/template.js'
+      import './components/TopStory/index.js'
+
+      import './components/DrawerItem/template.js'
+      import './components/DrawerItem/index.js'
+
+      import './components/DrawerView/template.js'
+      import './components/DrawerView/index.js'
+
+      import './components/EmbedView/template.js'
+      import './components/EmbedView/index.js'
     </script>
   </body>
 </html>

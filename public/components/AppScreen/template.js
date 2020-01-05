@@ -2,10 +2,12 @@
   const html = /*html*/`
     <div class="container">
       <header class="header">
-        <h1>
-          <span aria-hidden="true">HN</span>
-          <span class="visually-hidden">Hacker News</span>
-        </h1>
+        <a href="#">
+          <h1>
+            <span aria-hidden="true">HN</span>
+            <span class="visually-hidden">Hacker News</span>
+          </h1>
+        </a>
         <a href="https://github.com/michaelcpuckett/hn-pwa-1">Alpha</a>
         <!--<nav>
           <button type="button" aria-label="Search" data-modal="search">
@@ -25,6 +27,7 @@
           <slot></slot>
         </section>
         <slot name="drawer"></slot>
+        <slot name="embed"></slot>
       </main>
       <nav class="footer">
         <a href="#" aria-label="Top Stories" onclick="handleTopClick(event)">
