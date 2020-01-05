@@ -94,15 +94,6 @@
         overflow: hidden;
         position: relative;
       }
-      .embed-view:before {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        content: '';
-        z-index: -1;
-      }
     </style>
   `
   const template = window.document.createElement('template')

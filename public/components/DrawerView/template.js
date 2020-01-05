@@ -73,9 +73,9 @@
       }
       .drawer-view:before {
         position: fixed;
-        top: 0;
+        bottom: 0;
         left: 0;
-        height: 100%;
+        height: calc(100% - var(--header-height));
         width: 100%;
         content: '';
         z-index: -1;
