@@ -40,21 +40,21 @@
     .close {
       position: absolute;
       right: 1rem;
-      bottom: 1rem;
+      bottom: 2rem;
       transform: translateY(-50%);
       background: var(--swatch-section-accent);
       color: white;
       font-weight: 500;
       font-family: 'Kanit', sans-serif;
-      font-size: 2rem;
+      font-size: 3rem;
       border-radius: 100%;
-      width: 3rem;
-      height: 3rem;
+      width: 4rem;
+      height: 4rem;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      line-height: 3rem;
+      line-height: 4rem;
     }
       :host {
         position: fixed;
@@ -68,7 +68,8 @@
         height: 100%;
         width: 100%;
         padding: 2rem;
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: scroll;
       }
       .drawer-view:before {
         position: fixed;
