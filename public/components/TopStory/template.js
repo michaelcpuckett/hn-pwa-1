@@ -101,6 +101,13 @@
         background: var(--swatch-section);
         color: var(--swatch-on-section);
       }
+      .top-story-meta:visited,
+      .top-story-main:visited {
+        background: #333;
+      }
+      .top-story-meta:visited {
+        border-top-color: #d2d2d2;
+      }
       .visually-hidden {
         position: absolute; 
         overflow: hidden; 

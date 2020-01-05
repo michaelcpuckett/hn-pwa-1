@@ -106,7 +106,7 @@ window.customElements.define('app-screen', class extends HTMLElement {
 
     const hammerTime = new Hammer(window.document.body)
     hammerTime.on('swipeend panend', (e) => {
-      const drawerView = window.document.querySelector('drawer-view, embed-view')
+      const drawerView = window.document.querySelector('drawer-view, iframe')
       if (drawerView) {
         drawerView.style.transform = ''
         if (e.distance > 180) {
@@ -115,7 +115,7 @@ window.customElements.define('app-screen', class extends HTMLElement {
       }
     })
     hammerTime.on('swiperight panright', (e) => {
-      const drawerView = window.document.querySelector('drawer-view, embed-view')
+      const drawerView = window.document.querySelector('drawer-view, iframe')
       if (drawerView) {
         if (e.distance > 180) {
           window.history.back()
