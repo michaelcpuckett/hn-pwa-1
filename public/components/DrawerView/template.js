@@ -1,10 +1,10 @@
 ;(() => {
   const html = /*html*/`
     <aside class="drawer-view">
-      <button onclick="closeDrawer(event)" class="close">
+      <a href="#" class="close">
         <span class="visually-hidden">Close</span>
         ×
-      </button>
+      </a>
       <h2>
         <slot name="title"></slot>
       </h2>
@@ -51,6 +51,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      text-decoration: none;
       text-align: center;
       line-height: 4rem;
     }

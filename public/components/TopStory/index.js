@@ -16,6 +16,7 @@ window.customElements.define('top-story', class extends HTMLElement {
   set id(value) {
     if (value !== this._id) {
       this._id = value
+      this.dataset.id = value
       ;(async () => {
         const item = await fetch(`https://hacker-news.firebaseio.com/v0/item/${value}.json`).then(res => res.json())
         this.data = item
@@ -47,9 +48,8 @@ window.customElements.define('top-story', class extends HTMLElement {
     this.setSlot('descendants', value)
   }
   set url(value) {
-    ;[...this.shadowRoot.querySelectorAll('[data-url]')].forEach(element => {
-      element.setAttribute('href', value)
-      element.dataset.url = value
+    ;[...this.shadowRoot.querySelectorAll('[href]')].forEach(element => {
+      element.setAttribute('href', `#embed/${value}`)
     })
   }
   set kids(value) {

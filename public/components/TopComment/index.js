@@ -35,8 +35,8 @@ window.customElements.define('top-comment', class extends HTMLElement {
     })
   }
   set parentid(value) {
-    ;[...this.shadowRoot.querySelectorAll('[data-parentid]')].forEach(element => {
-      element.dataset.parentid = value
+    ;[...this.shadowRoot.querySelectorAll('[href]')].forEach(element => {
+      element.setAttribute('href', `#comments/${value}`)
     })
   }
   set url(value) {

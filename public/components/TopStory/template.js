@@ -1,7 +1,7 @@
 ;(() => {
   const html = /*html*/`
     <article class="top-story" typeof="SocialMediaPosting">
-      <a data-url href="" class="top-story-meta" onclick="openEmbed(event, event.currentTarget.dataset.url)">
+      <a href="" class="top-story-meta">
         <!--<time class="top-story-time" datetime="2020-01-01T14:12:11" property="dateCreated">
           <slot name="time"></slot>
         </time>-->
@@ -18,7 +18,7 @@
         </div>
       </a>
       <div class="top-story-content" property="sharedContent" typeof="Article">
-        <a data-url class="top-story-main" href="" onclick="openEmbed(event, event.currentTarget.dataset.url)">
+        <a href="" class="top-story-main">
           <h3 class="top-story-headline" property="headline">
             <slot name="title"></slot>
           </h3>

@@ -4,7 +4,18 @@ window.customElements.define('app-screen', class extends HTMLElement {
 
     this._isLoading = false
     this._host = this
+    this.fragment = window.document.createDocumentFragment()
 
+    window.document.body.addEventListener('click', (e) => {
+      const href = e.composedPath()[0].getAttribute('href')
+      if (href) {
+        if (href.startsWith('#')) {
+          e.preventDefault()
+          window.history.pushState({}, '', href)
+          this.handleRoute()
+        }
+      }
+    })
     window.addEventListener('hashchange', () => {
       this.handleRoute()
     })
@@ -46,6 +57,7 @@ window.customElements.define('app-screen', class extends HTMLElement {
     }
   }
   async handleRoute() {
+    const scrollY = window.scrollY
     if (!window.location.hash || window.location.hash === '#newstories') {
       const drawerView = window.document.querySelector('drawer-view')
       if (drawerView) {
@@ -60,16 +72,28 @@ window.customElements.define('app-screen', class extends HTMLElement {
         this.section = window.location.hash === '#newstories' ? 'newstories' : 'topstories'
         let storyIDs = window.localStorage.getItem(window.location.hash === '#newstories' ? '#newstories' : '#topstories')
         const handleStories = () => {
-          ;[...window.document.querySelectorAll('top-story')].forEach(el => el.remove())
-          storyIDs.forEach(id => {
-            const element = window.document.createElement('top-story')
-            this.append(element)
-            Object.assign(element, {
-              id,
-              url: `https://news.ycombinator.com/item?id=${id}`
-            })
+          const elements = [...window.document.querySelectorAll('top-story')]
+          elements.forEach(el => {
+            if (!storyIDs.includes(el.dataset.id)) {
+              this.fragment.append(el)
+            }
           })
-          window.scrollTo(0, 0)
+          storyIDs.forEach(id => {
+            const cachedElement = elements.find(el => el.dataset.id === id) || this.fragment.querySelector(`[data-id="${id}"]`)
+            if (cachedElement) {
+              this.append(cachedElement)
+            } else {
+              const element = window.document.createElement('top-story')
+              this.append(element)
+              Object.assign(element, {
+                id,
+                url: `https://news.ycombinator.com/item?id=${id}`
+              })
+            }
+          })
+          // window.requestAnimationFrame(() => {
+          //   window.scrollTo(0, 0)
+          // })
         }
         const getStories = (async () => {
           storyIDs = (await fetch(`https://hacker-news.firebaseio.com/v0/${this._section}.json`).then(res => res.json())).slice(0, 25)

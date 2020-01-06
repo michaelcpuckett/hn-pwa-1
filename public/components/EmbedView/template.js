@@ -10,10 +10,10 @@
       <div class="embed-container">
         <slot></slot>
       </div>
-      <button onclick="closeEmbed(event)" class="close">
+      <a href="#" class="close">
         <span class="visually-hidden">Close</span>
         ×
-      </button>
+      </a>
     </aside>
     <style>
     * {
@@ -87,6 +87,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      text-decoration: none;
       z-index: 1;
     }
       :host {
