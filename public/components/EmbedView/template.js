@@ -6,9 +6,9 @@
       </div>
       <div data-show-if="loading" class="embed-loader">
         <p>Loading...</p>
-        <button class="share-story" data-if-sharing-supported data-url data-title onclick="shareStory(event)">
+        <!--<button class="share-story" data-if-sharing-supported data-url data-title onclick="shareStory(event)">
           Open In...
-        </button>
+        </button>-->
       </div>
       <a href="#" class="close">
         <span class="visually-hidden">Close</span>

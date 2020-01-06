@@ -5,6 +5,12 @@ window.customElements.define('embed-view', class extends HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
   }
+  openWindow(value) {
+    const a = window.document.createElement('a')
+    a.setAttribute('href', value)
+    a.dispatchEvent(new MouseEvent('click'))
+    a.remove()
+  }
   setSlot(slot, value) {
     if (!this.querySelector(`[slot="${slot}"]`)) {
       const element = window.document.createElement('data')
@@ -25,14 +31,14 @@ window.customElements.define('embed-view', class extends HTMLElement {
         .then(hasFramePolicy => {
           if (hasFramePolicy) {
             window.history.replaceState({}, '', `#${this.closest('app-screen').dataset.section}`)
-            window.open(value, '_blank')
             this.remove()
+            this.openWindow(value)
           }
         })
         .catch(() => {
           window.history.replaceState({}, '', `#${this.closest('app-screen').dataset.section}`)
-          window.open(value, '_blank')
           this.remove()
+          this.openWindow(value)
         })
       const element = window.document.createElement('iframe')
       element.addEventListener('load', () => {
