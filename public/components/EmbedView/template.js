@@ -1,14 +1,14 @@
 ;(() => {
   const html = /*html*/`
     <aside class="embed-view">
-      <div class="embed-loader">
+      <div class="embed-container">
+        <slot></slot>
+      </div>
+      <div data-show-if="loading" class="embed-loader">
         <p>Loading...</p>
         <button class="share-story" data-if-sharing-supported data-url data-title onclick="shareStory(event)">
           Open In...
         </button>
-      </div>
-      <div class="embed-container">
-        <slot></slot>
       </div>
       <a href="#" class="close">
         <span class="visually-hidden">Close</span>
@@ -70,6 +70,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        background: black;
       }
     .close {
       position: absolute;

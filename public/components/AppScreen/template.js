@@ -35,7 +35,7 @@
         <slot name="embed"></slot>
       </main>
       <nav class="footer">
-        <a href="#" aria-label="Top Stories">
+        <a href="#topstories" aria-label="Top Stories">
           Top<!--<hn-icon glyph="newspaper"></hn-icon>-->
         </a>
         <a href="#newstories" aria-label="Latest">

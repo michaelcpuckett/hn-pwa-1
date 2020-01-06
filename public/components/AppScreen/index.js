@@ -7,12 +7,27 @@ window.customElements.define('app-screen', class extends HTMLElement {
     this.fragment = window.document.createDocumentFragment()
 
     window.document.body.addEventListener('click', (e) => {
+      const hash = window.location.hash
       const href = e.composedPath()[0].getAttribute('href')
       if (href) {
-        if (href.startsWith('#')) {
-          e.preventDefault()
-          window.history.pushState({}, '', href)
-          this.handleRoute()
+        if (href.startsWith('#') || href === '') {
+          if (hash.replace('#', '') === href.replace('#', '')) {
+            e.preventDefault()
+            window.scrollTo(0, 0)
+          } else {
+            e.preventDefault()
+            if (href === '#' || href === '') {
+              window.history.pushState({}, '', `#${this.section}`)
+            } else {
+              window.history.pushState({}, '', `#${href.replace('#', '')}`)
+            }
+            this.handleRoute()
+
+            const relativeHash = [hash.replace('#', ''), href.replace('#', '')]
+            if (relativeHash.includes('topstories') && relativeHash.includes('newstories')) {
+              window.scrollTo(0, 0)
+            }
+          }
         }
       }
     })
@@ -57,8 +72,7 @@ window.customElements.define('app-screen', class extends HTMLElement {
     }
   }
   async handleRoute() {
-    const scrollY = window.scrollY
-    if (!window.location.hash || window.location.hash === '#newstories') {
+    if (['topstories', 'newstories', ''].includes(window.location.hash.replace('#', ''))) {
       const drawerView = window.document.querySelector('drawer-view')
       if (drawerView) {
         drawerView.remove()
@@ -66,11 +80,15 @@ window.customElements.define('app-screen', class extends HTMLElement {
       const embedView = window.document.querySelector('embed-view')
       if (embedView) {
         embedView.remove()
+        return
+      }
+      if (window.location.hash.replace('#', '') === '') {
+        window.history.replaceState({}, '', `#${this.section || 'topstories'}`)
       }
       if (!this.isLoading) {
         this.isLoading = true
-        this.section = window.location.hash === '#newstories' ? 'newstories' : 'topstories'
-        let storyIDs = window.localStorage.getItem(window.location.hash === '#newstories' ? '#newstories' : '#topstories')
+        this.section = window.location.hash.replace('#', '') === 'newstories' ? 'newstories' : 'topstories'
+        let storyIDs = window.localStorage.getItem(window.location.hash.replace('#', '') === 'newstories' ? '#newstories' : '#topstories')
         const handleStories = () => {
           const elements = [...window.document.querySelectorAll('top-story')]
           elements.forEach(el => {
@@ -91,9 +109,6 @@ window.customElements.define('app-screen', class extends HTMLElement {
               })
             }
           })
-          // window.requestAnimationFrame(() => {
-          //   window.scrollTo(0, 0)
-          // })
         }
         const getStories = (async () => {
           storyIDs = (await fetch(`https://hacker-news.firebaseio.com/v0/${this._section}.json`).then(res => res.json())).slice(0, 25)
@@ -115,14 +130,14 @@ window.customElements.define('app-screen', class extends HTMLElement {
         this.isLoading = false
       }
     } else if (window.location.hash.startsWith(`#comments`)) {
-      this.section = 'topstories'
+      this.section = this.section || 'topstories'
       const id = window.location.hash.split('/')[1]
       const element = window.document.createElement('drawer-view')
       element.setAttribute('slot', 'drawer')
       this.appendChild(element)
       Object.assign(element, { id })
     } else if (window.location.hash.startsWith(`#embed`)) {
-      this.section = 'topstories'
+      this.section = this.section || 'topstories'
       let [ _, ...url ] = window.location.hash.split('/')
       url = url.join('/')
       const element = window.document.createElement('embed-view')
@@ -136,10 +151,13 @@ window.customElements.define('app-screen', class extends HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     await new Promise(resolve => window.requestAnimationFrame(resolve))
+    if (!window.location.hash || window.location.hash === '#') {
+      window.history.pushState({}, '', '#topstories')
+    }
     this.handleRoute()
     window.addEventListener('scroll', () => {
       if (window.scrollY < -140) {
-        // data.refetch()
+        // this.handleRoute()
       }
     })
     window.shareStory = (e) => {
