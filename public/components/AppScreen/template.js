@@ -24,16 +24,21 @@
             <span data-show-if="topstories">Top Stories</span>
             <span data-show-if="newstories">New Stories</span>
           </h2>
-          <slot></slot>
+          <div data-show-if-loading="loading">
+            Loading...
+          </div>
+          <div data-show-if-loading="loaded">
+            <slot></slot>
+          </div>
         </section>
         <slot name="drawer"></slot>
         <slot name="embed"></slot>
       </main>
       <nav class="footer">
-        <a href="#" aria-label="Top Stories" onclick="handleTopClick(event)">
+        <a href="#" aria-label="Top Stories">
           Top<!--<hn-icon glyph="newspaper"></hn-icon>-->
         </a>
-        <a href="#" aria-label="Latest" onclick="handleLatestClick(event)">
+        <a href="#newstories" aria-label="Latest">
           Latest<!--<hn-icon glyph="list"></hn-icon>-->
         </a><!--
         <a href="/settings" aria-label="Settings">
@@ -42,9 +47,23 @@
       </nav>
     </div>
     <style>
+      :host([data-loading="loading"]) [data-show-if-loading]:not([data-show-if-loading="loading"]),
+      :host([data-loading="loaded"]) [data-show-if-loading]:not([data-show-if-loading="loaded"]) {
+        display: none;
+      }
       :host([data-section="topstories"]) [data-show-if]:not([data-show-if="topstories"]),
       :host([data-section="newstories"]) [data-show-if]:not([data-show-if="newstories"]) {
         display: none;
+      }
+      [data-show-if-loading="loading"] {
+        display: grid;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
       * {
         margin: 0;

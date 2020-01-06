@@ -24,6 +24,10 @@
           </h3>
         </a>
         <slot name="top-comment"></slot>
+        
+        <button class="share-story" data-if-sharing-supported data-url data-title onclick="shareStory(event)">
+          Share
+        </button>
       </div>
     </article>
     <style>
@@ -117,6 +121,13 @@
         margin: -1px;
         padding: 0;
         border: 0; 
+      }
+      .share-story {
+        padding: .5rem 1rem;
+        font-weight: 500;
+        border: 2px solid var(--swatch-section-accent);;
+        font-family: 'Kanit', sans-serif;
+        margin: 1.5rem;
       }
     </style>
   `

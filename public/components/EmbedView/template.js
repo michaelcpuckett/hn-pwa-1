@@ -2,14 +2,17 @@
   const html = /*html*/`
     <aside class="embed-view">
       <div class="embed-loader">
-        Loading...
+        <p>Loading...</p>
+        <button class="share-story" data-if-sharing-supported data-url data-title onclick="shareStory(event)">
+          Open In...
+        </button>
       </div>
       <div class="embed-container">
         <slot></slot>
       </div>
       <button onclick="closeEmbed(event)" class="close">
         <span class="visually-hidden">Close</span>
-        X
+        ×
       </button>
     </aside>
     <style>
@@ -29,6 +32,13 @@
       line-height: inherit;
       color: inherit;
     }
+      .share-story {
+        padding: .5rem 1rem;
+        font-weight: 500;
+        border: 2px solid var(--swatch-section-accent);;
+        font-family: 'Kanit', sans-serif;
+        margin: 1.5rem;
+      }
       .visually-hidden {
         position: absolute; 
         overflow: hidden; 
@@ -49,7 +59,8 @@
         left: 0;
       }
       .embed-loader {
-        display: flex;
+        display: grid;
+        grid-gap: 2rem;
         height: 100%;
         width: 100%;
         z-index: 0;
@@ -62,22 +73,20 @@
       }
     .close {
       position: absolute;
-      right: 1rem;
+      left: 1rem;
       bottom: 2rem;
       transform: translateY(-50%);
       background: var(--swatch-section-accent);
       color: white;
-      font-weight: 500;
-      font-family: 'Kanit', sans-serif;
       font-size: 3rem;
       border-radius: 100%;
       width: 4rem;
       height: 4rem;
+      line-height: 3rem;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      line-height: 4rem;
       z-index: 1;
     }
       :host {
@@ -88,7 +97,6 @@
         z-index: 9;
       }
       .embed-view {
-        background: black;
         height: 100%;
         width: 100%;
         overflow: hidden;

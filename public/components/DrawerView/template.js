@@ -3,7 +3,7 @@
     <aside class="drawer-view">
       <button onclick="closeDrawer(event)" class="close">
         <span class="visually-hidden">Close</span>
-        X
+        ×
       </button>
       <h2>
         <slot name="title"></slot>
@@ -39,13 +39,11 @@
       }
     .close {
       position: absolute;
-      right: 1rem;
+      left: 1rem;
       bottom: 2rem;
       transform: translateY(-50%);
       background: var(--swatch-section-accent);
       color: white;
-      font-weight: 500;
-      font-family: 'Kanit', sans-serif;
       font-size: 3rem;
       border-radius: 100%;
       width: 4rem;
