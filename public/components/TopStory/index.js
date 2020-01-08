@@ -51,6 +51,9 @@ window.customElements.define('top-story', class extends HTMLElement {
     ;[...this.shadowRoot.querySelectorAll('[href]')].forEach(element => {
       element.setAttribute('href', `#embed/${value}`)
     })
+    ;[...this.shadowRoot.querySelectorAll('[data-url]')].forEach(element => {
+      element.dataset.url = value
+    })
   }
   set kids(value) {
     ;(async () => {
