@@ -58,17 +58,23 @@ window.customElements.define('top-story', class extends HTMLElement {
   set kids(value) {
     ;(async () => {
       const cachedData = window.localStorage.getItem(this.data.id)
-      const data = cachedData ? JSON.parse(cachedData) : {
+      const getFreshData = async () => ({
         ...(await fetch(`https://hacker-news.firebaseio.com/v0/item/${value[0]}.json`).then(res => res.json())) || {},
         descendants: this.data.descendants,
         parentid: this.data.id,
         url: `https://news.ycombinator.com/item?id=${this.data.id}`
-      }
+      })
+      const data = cachedData ? JSON.parse(cachedData) : await getFreshData()
       const element = window.document.createElement('top-comment')
       element.setAttribute('slot', 'top-comment')
       this.append(element)
       Object.assign(element, data)
-      window.localStorage.setItem(this.data.id, JSON.stringify(data))
+      if (cachedData) {
+        getFreshData().then(freshData => {
+          Object.assign(element, freshData)
+          window.localStorage.setItem(this.data.id, JSON.stringify(freshData))
+        })
+      }
     })()
   }
 })
