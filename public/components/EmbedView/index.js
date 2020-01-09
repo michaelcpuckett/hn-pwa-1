@@ -26,22 +26,20 @@ window.customElements.define('embed-view', class extends HTMLElement {
       })
     }
     ;(async () => {
-      if (!value.includes('dev.to/')) {
-        fetch(`https://cors-anywhere.herokuapp.com/${value}`)
-          .then(res => res.headers.get('X-Frame-Options'))
-          .then(hasFramePolicy => {
-            if (hasFramePolicy) {
-              window.history.replaceState({}, '', `#${this.closest('app-screen').dataset.section}`)
-              this.remove()
-              this.openWindow(value)
-            }
-          })
-          .catch(() => {
+      fetch(`https://cors-anywhere.herokuapp.com/${value}`)
+        .then(res => res.headers.get('X-Frame-Options'))
+        .then(hasFramePolicy => {
+          if (hasFramePolicy) {
             window.history.replaceState({}, '', `#${this.closest('app-screen').dataset.section}`)
             this.remove()
             this.openWindow(value)
-          })
-      }
+          }
+        })
+        .catch(() => {
+          window.history.replaceState({}, '', `#${this.closest('app-screen').dataset.section}`)
+          this.remove()
+          this.openWindow(value)
+        })
       const element = window.document.createElement('iframe')
       element.addEventListener('load', () => {
         ;[...this.shadowRoot.querySelectorAll('[data-show-if="loading"]')].map(el => el.style.display = 'none')
