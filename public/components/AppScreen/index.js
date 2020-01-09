@@ -72,23 +72,24 @@ window.customElements.define('app-screen', class extends HTMLElement {
     }
   }
   async handleRoute() {
-    if (['topstories', 'newstories', ''].includes(window.location.hash.replace('#', ''))) {
+    if (['topstories', 'newstories', 'devstories', ''].includes(window.location.hash.replace('#', ''))) {
       const drawerView = window.document.querySelector('drawer-view')
       if (drawerView) {
         drawerView.remove()
+        return
       }
       const embedView = window.document.querySelector('embed-view')
       if (embedView) {
         embedView.remove()
         return
       }
+      this.section = window.location.hash.replace('#', '') || 'topstories'
       if (window.location.hash.replace('#', '') === '') {
-        window.history.replaceState({}, '', `#${this.section || 'topstories'}`)
+        window.location.replaceState({}, '', `#${this.section}`)
       }
       if (!this.isLoading) {
         this.isLoading = true
-        this.section = window.location.hash.replace('#', '') === 'newstories' ? 'newstories' : 'topstories'
-        let storyIDs = window.localStorage.getItem(window.location.hash.replace('#', '') === 'newstories' ? '#newstories' : '#topstories')
+        let storyIDs = window.localStorage.getItem(`#${this.section}`)
         const handleStories = () => {
           const elements = [...window.document.querySelectorAll('top-story')]
           elements.forEach(el => {
@@ -103,16 +104,17 @@ window.customElements.define('app-screen', class extends HTMLElement {
             } else {
               const element = window.document.createElement('top-story')
               this.append(element)
-              Object.assign(element, {
-                id,
-                url: `https://news.ycombinator.com/item?id=${id}`
-              })
+              element.section = this.section
+              element.id = id
             }
           })
         }
         const getStories = (async () => {
-          storyIDs = (await fetch(`https://hacker-news.firebaseio.com/v0/${this._section}.json`).then(res => res.json())).slice(0, 25)
-          window.localStorage.setItem(window.location.hash === '#newstories' ? '#newstories' : '#topstories', JSON.stringify(storyIDs))
+          storyIDs = (await fetch(this.section === 'devstories' ? `https://dev.to/api/articles` : `https://hacker-news.firebaseio.com/v0/${this._section}.json`).then(res => res.json())).slice(0, 30)
+          if (this.section === 'devstories') {
+            storyIDs = storyIDs.map(({ id }) => id)
+          }
+          window.localStorage.setItem(`#${this.section}`, JSON.stringify(storyIDs))
         })
         if (storyIDs) {
           storyIDs = JSON.parse(storyIDs)

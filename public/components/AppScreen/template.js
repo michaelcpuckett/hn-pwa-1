@@ -4,8 +4,8 @@
       <header class="header">
         <a href="#">
           <h1>
-            <span aria-hidden="true">HN</span>
-            <span class="visually-hidden">Hacker News</span>
+            <span aria-hidden="true">Digest</span>
+            <span class="visually-hidden">Hacker News, Dev.to Reader</span>
           </h1>
         </a>
         <a href="https://github.com/michaelcpuckett/hn-pwa-1">Alpha</a>
@@ -21,8 +21,9 @@
       <main class="main">
         <section aria-label="Front Page">
           <h2 class="h2-top">
-            <span data-show-if="topstories">Top Stories</span>
-            <span data-show-if="newstories">New Stories</span>
+            <span data-show-if="topstories">Top HN Stories</span>
+            <span data-show-if="newstories">New HN Stories</span>
+            <span data-show-if="devstories">Dev.to Stories</span>
           </h2>
           <div data-show-if-loading="loading">
             Loading...
@@ -36,10 +37,13 @@
       </main>
       <nav class="footer">
         <a href="#topstories" aria-label="Top Stories">
-          Top<!--<hn-icon glyph="newspaper"></hn-icon>-->
+          HN Top<!--<hn-icon glyph="newspaper"></hn-icon>-->
         </a>
         <a href="#newstories" aria-label="Latest">
-          Latest<!--<hn-icon glyph="list"></hn-icon>-->
+          HN New<!--<hn-icon glyph="list"></hn-icon>-->
+        </a>
+        <a href="#devstories" aria-label="Dev.to">
+          Dev.to<!--<hn-icon glyph="list"></hn-icon>-->
         </a><!--
         <a href="/settings" aria-label="Settings">
           <hn-icon glyph="settings"></hn-icon>
@@ -47,12 +51,30 @@
       </nav>
     </div>
     <style>
+      
+      :host([data-section="topstories"]) {
+        --swatch-section: #500F74;
+        --swatch-section-accent: #CD00D8;
+        --swatch-on-section: white;
+      }
+      :host([data-section="newstories"]) {
+        --swatch-section: #004BD8;
+        --swatch-section-accent: #3078FF;
+        --swatch-on-section: white;
+      }
+      :host([data-section="devstories"]) {
+        --swatch-section: #141f2d;
+        --swatch-section-accent: #22303f;
+        --swatch-on-section: white;
+      }
+
       :host([data-loading="loading"]) [data-show-if-loading]:not([data-show-if-loading="loading"]),
       :host([data-loading="loaded"]) [data-show-if-loading]:not([data-show-if-loading="loaded"]) {
         display: none;
       }
       :host([data-section="topstories"]) [data-show-if]:not([data-show-if="topstories"]),
-      :host([data-section="newstories"]) [data-show-if]:not([data-show-if="newstories"]) {
+      :host([data-section="newstories"]) [data-show-if]:not([data-show-if="newstories"]),
+      :host([data-section="devstories"]) [data-show-if]:not([data-show-if="devstories"]) {
         display: none;
       }
       [data-show-if-loading="loading"] {

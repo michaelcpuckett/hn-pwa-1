@@ -105,11 +105,11 @@
         background: var(--swatch-section);
         color: var(--swatch-on-section);
       }
-      .top-story-meta:visited,
-      .top-story-main:visited {
+      :host([visited]) .top-story-meta,
+      :host([visited]) .top-story-main {
         background: #333;
       }
-      .top-story-meta:visited {
+      :host([visited]) .top-story-meta {
         border-top-color: #d2d2d2;
       }
       .visually-hidden {

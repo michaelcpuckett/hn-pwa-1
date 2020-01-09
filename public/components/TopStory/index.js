@@ -4,6 +4,11 @@ window.customElements.define('top-story', class extends HTMLElement {
     const template = window.document.getElementById('top-story-template')
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
+    this.addEventListener('click', (e) => {
+      if (e.composedPath()[1].getRootNode() === this.shadowRoot) {
+        this.visited = true
+      }
+    })
   }
   setSlot(slot, value) {
     if (!this.querySelector(`[slot="${slot}"]`)) {
@@ -13,12 +18,18 @@ window.customElements.define('top-story', class extends HTMLElement {
     }
     this.querySelector(`[slot="${slot}"]`).innerHTML = value
   }
+  set user(value) {
+    this.setSlot('by', value.username)
+  }
+  set visited(value) {
+    this.setAttribute('visited', '')
+  }
   set id(value) {
     if (value !== this._id) {
       this._id = value
       this.dataset.id = value
       ;(async () => {
-        const item = await fetch(`https://hacker-news.firebaseio.com/v0/item/${value}.json`).then(res => res.json())
+        const item = await fetch(this.section === 'devstories' ? `https://dev.to/api/articles/${value}` : `https://hacker-news.firebaseio.com/v0/item/${value}.json`).then(res => res.json())
         this.data = item
         Object.assign(this, item)
       })()
@@ -28,6 +39,9 @@ window.customElements.define('top-story', class extends HTMLElement {
     this.setSlot('by', value)
   }
   set score(value) {
+    this.setSlot('score', value)
+  }
+  set positive_reactions_count(value) {
     this.setSlot('score', value)
   }
   set title(value) {
@@ -45,6 +59,9 @@ window.customElements.define('top-story', class extends HTMLElement {
     this.setSlot('type', value)
   }
   set descendants(value) {
+    this.setSlot('descendants', value)
+  }
+  set comments_count(value) {
     this.setSlot('descendants', value)
   }
   set url(value) {

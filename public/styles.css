@@ -39,16 +39,6 @@ body {
     --swatch-grey-bg: white;
   }
 }
-[data-section="topstories"] {
-  --swatch-section: #500F74;
-  --swatch-section-accent: #CD00D8;
-  --swatch-on-section: white;
-}
-[data-section="newstories"] {
-  --swatch-section: #004BD8;
-  --swatch-section-accent: #3078FF;
-  --swatch-on-section: white;
-}
 a {
   color: inherit;
 }
